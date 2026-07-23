@@ -1,0 +1,176 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stránka-1" id="gLsEwQl8Rs5Pm-pdwX2e">
+    <mxGraphModel dx="1458" dy="1945" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Aggregate Root&amp;gt;&amp;gt;&lt;div&gt;&amp;nbsp;Reklamace&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="140" x="450" y="-99" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-2" parent="aTMHCQ1WoE9WSlNbvQFW-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="+ReklamaceId Id" vertex="1">
+          <mxGeometry height="30" width="140" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-3" parent="aTMHCQ1WoE9WSlNbvQFW-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="+TenantId Tenant" vertex="1">
+          <mxGeometry height="30" width="140" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-4" parent="aTMHCQ1WoE9WSlNbvQFW-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="+Stav Stav" vertex="1">
+          <mxGeometry height="30" width="140" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-5" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Entity / Snapshot&amp;gt;&amp;gt;&lt;div&gt;DodaciListSnapshot&lt;/div&gt;" vertex="1">
+          <mxGeometry height="400" width="150" x="445" y="101" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-9" parent="aTMHCQ1WoE9WSlNbvQFW-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ Guid DeliveryNoteId&lt;/div&gt;&lt;div&gt;+ string CisloDL&lt;/div&gt;&lt;div&gt;+ DateTime DatumDodani&lt;/div&gt;&lt;div&gt;+ string ZakaznikNazev&lt;/div&gt;&lt;div&gt;+ string ZakaznikIco&lt;/div&gt;&lt;div&gt;+ string ZakaznikDic&lt;/div&gt;&lt;div&gt;+string ZakaznikAdresa&lt;/div&gt;&lt;div&gt;+ string StavbaNazev&lt;/div&gt;&lt;div&gt;+ decimal Mnozstvi&lt;/div&gt;&lt;div&gt;+ string MerneJednotky&lt;/div&gt;&lt;div&gt;+ decimal CenaBezDph&lt;/div&gt;&lt;div&gt;+decimal SazbaDph&lt;/div&gt;&lt;div&gt;+string Mena&lt;/div&gt;&lt;div&gt;+bool JePrimarni&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="370" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-10" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;FakturaSnapshot&lt;/div&gt;" vertex="1">
+          <mxGeometry height="220" width="170" x="30" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-11" parent="aTMHCQ1WoE9WSlNbvQFW-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ Guid FakturaId&lt;/div&gt;&lt;div&gt;+ string CisloFaktury&lt;/div&gt;&lt;div&gt;+ DateTime DatumVystaveni&lt;/div&gt;&lt;div&gt;+ DateTime Splatnost&lt;/div&gt;&lt;div&gt;+ decimal CastkaBezDph&lt;/div&gt;&lt;div&gt;+decimal SazbaDph&lt;/div&gt;&lt;div&gt;+string Mena&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="170" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-12" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;ZamesovyProtokolSnapshot&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="200" x="280" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-13" parent="aTMHCQ1WoE9WSlNbvQFW-12" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ decimal VodniSoucinitelNavrzeny&lt;/div&gt;&lt;div&gt;+ decimal VodniSoucinitelRealny&lt;/div&gt;&lt;div&gt;+ decimal TeplotaBetonu&lt;/div&gt;&lt;div&gt;+ bool MimoLimit&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-14" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;CertifikatSnapshot&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="550" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-15" parent="aTMHCQ1WoE9WSlNbvQFW-14" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ string Norma&lt;/div&gt;&lt;div&gt;+ string CisloCertifikatu&lt;/div&gt;&lt;div&gt;+ string Vydal&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-16" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;RecepturaSnapshot&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="150" x="760" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-17" parent="aTMHCQ1WoE9WSlNbvQFW-16" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ string Kod&lt;/div&gt;&lt;div&gt;+ string Nazev&lt;/div&gt;&lt;div&gt;+ string PevnostniTrida&lt;/div&gt;&lt;div&gt;+ string Konzistence&lt;/div&gt;&lt;div&gt;+ string ProstrediXC&lt;/div&gt;&lt;div&gt;+ int MaxZrno&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-18" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;NavazkaPolozka&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="150" x="305" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-19" parent="aTMHCQ1WoE9WSlNbvQFW-18" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ string Material&lt;/div&gt;&lt;div&gt;+ decimal Navrzeno&lt;/div&gt;&lt;div&gt;+ decimal Realne&lt;/div&gt;&lt;div&gt;+string Jednotka&lt;/div&gt;&lt;div&gt;+ decimal OdchylkaProcent&lt;/div&gt;&lt;div&gt;+ bool MimoLimit&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-20" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;SlozeniPolozka&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="150" x="640" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-21" parent="aTMHCQ1WoE9WSlNbvQFW-20" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ string Material&lt;/div&gt;&lt;div&gt;+ decimal Mnozstvi&lt;/div&gt;&lt;div&gt;+ string Jednotka&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="150" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-22" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&amp;lt;&amp;lt;Snapshot&amp;gt;&amp;gt;&lt;div&gt;LaboratorniVysledek&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="180" x="857" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-23" parent="aTMHCQ1WoE9WSlNbvQFW-22" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;div style=&quot;line-height: 220%;&quot;&gt;&lt;div&gt;+ int StariDny&lt;/div&gt;&lt;div&gt;+ decimal PevnostMPa&lt;/div&gt;&lt;div&gt;+ decimal PozadovanaHodnota&lt;/div&gt;&lt;div&gt;+ bool Vyhovuje&lt;/div&gt;&lt;div&gt;+ DateTime DatumZkousky&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="180" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-26" edge="1" parent="1" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;entryX=0.493;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.491;exitY=-0.001;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <mxPoint x="519.8199999999999" y="100.72999999999996" as="sourcePoint" />
+            <mxPoint x="520.1899999999999" y="21" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-27" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-26" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="pokrývá" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-28" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-16" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=1.019;entryY=0.838;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;entryPerimeter=0;" target="aTMHCQ1WoE9WSlNbvQFW-9" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="580" />
+            </Array>
+            <mxPoint x="700" y="569.73" as="sourcePoint" />
+            <mxPoint x="700.37" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-29" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-28" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="obsahuje recepturu" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-30" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-14" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;" target="aTMHCQ1WoE9WSlNbvQFW-9" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="560" />
+            </Array>
+            <mxPoint x="710" y="539.73" as="sourcePoint" />
+            <mxPoint x="710.37" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-31" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="má certifikáty" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint y="-21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-32" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-12" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;" target="aTMHCQ1WoE9WSlNbvQFW-9" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="550" />
+            </Array>
+            <mxPoint x="440" y="609.73" as="sourcePoint" />
+            <mxPoint x="440.37" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-33" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-32" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="má protokol" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint x="4" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-34" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-10" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=-0.033;entryY=0.833;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;" target="aTMHCQ1WoE9WSlNbvQFW-9" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="170" y="580" />
+            </Array>
+            <mxPoint x="140" y="569.73" as="sourcePoint" />
+            <mxPoint x="140.37" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-35" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-34" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="má fakturu" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint x="-16" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-36" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-18" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;" target="aTMHCQ1WoE9WSlNbvQFW-13" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <mxPoint x="550" y="859.73" as="sourcePoint" />
+            <mxPoint x="550.37" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-37" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-36" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="navážky" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-42" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-20" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;" target="aTMHCQ1WoE9WSlNbvQFW-17" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="870" />
+            </Array>
+            <mxPoint x="690" y="910" as="sourcePoint" />
+            <mxPoint x="690.37" y="830.27" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-43" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-42" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="složení" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-44" edge="1" parent="1" source="aTMHCQ1WoE9WSlNbvQFW-22" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=1;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=0;" target="aTMHCQ1WoE9WSlNbvQFW-17" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="930" y="880" />
+            </Array>
+            <mxPoint x="960" y="889.73" as="sourcePoint" />
+            <mxPoint x="960.37" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aTMHCQ1WoE9WSlNbvQFW-45" connectable="0" parent="aTMHCQ1WoE9WSlNbvQFW-44" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="pevnosti" vertex="1">
+          <mxGeometry relative="1" x="-0.3215" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

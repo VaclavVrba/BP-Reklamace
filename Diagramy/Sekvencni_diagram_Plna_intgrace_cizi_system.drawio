@@ -1,0 +1,203 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stránka-1" id="zltvx6jh7HPaOyP5pulP">
+    <mxGraphModel dx="1549" dy="825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6xeP986g01ldGgNOtZIw-62" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;fillStyle=solid;" value="" vertex="1">
+          <mxGeometry height="510" width="840" x="30" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#cce5ff;strokeColor=#36393d;" value="" vertex="1">
+          <mxGeometry height="60" width="30" x="50" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Cizí systém" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Reklamační aplikace" vertex="1">
+          <mxGeometry height="60" width="120" x="380" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;span style=&quot;color: rgb(26, 32, 44); font-family: &amp;quot;Segoe UI&amp;quot;, system-ui, sans-serif; font-size: 16px; text-align: start; white-space: nowrap;&quot;&gt;IdP&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="577.25" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;span style=&quot;color: rgb(26, 32, 44); font-family: &amp;quot;Segoe UI&amp;quot;, system-ui, sans-serif; font-size: 16px; text-align: start; white-space: nowrap;&quot;&gt;PostgreSQL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="780" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-12" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="60" y="880" as="sourcePoint" />
+            <mxPoint x="64.66" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-14" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="240" y="880" as="sourcePoint" />
+            <mxPoint x="240" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-15" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="65" y="160" as="sourcePoint" />
+            <mxPoint x="240" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="klik &quot;Reklamovat&quot; na dokladu" vertex="1">
+          <mxGeometry height="30" width="170" x="64" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-19" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=0.488;exitY=0.981;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="439.9200000000001" y="879.55" as="sourcePoint" />
+            <mxPoint x="439.76" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="redirect /new-claim (docId, tenant)" vertex="1">
+          <mxGeometry height="30" width="190" x="245" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-21" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="240" y="200" as="sourcePoint" />
+            <mxPoint x="440" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-23" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=0.726;exitY=0.981;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="639.8400000000001" y="879.55" as="sourcePoint" />
+            <mxPoint x="640" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-24" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="POST /token (client_credentials)" vertex="1">
+          <mxGeometry height="30" width="190" x="445" y="217" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-25" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="440" y="240" as="sourcePoint" />
+            <mxPoint x="641" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-26" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="640" y="280" as="sourcePoint" />
+            <mxPoint x="440" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-27" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="access_token" vertex="1">
+          <mxGeometry height="30" width="190" x="449" y="258" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-28" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=0.964;exitY=0.981;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="839.7599999999998" y="879.55" as="sourcePoint" />
+            <mxPoint x="840" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-29" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="440" y="320" as="sourcePoint" />
+            <mxPoint x="240" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-30" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="GET /claim-context/[docId] Authorization: Bearer [token]" vertex="1">
+          <mxGeometry height="30" width="180.5" x="249" y="288" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-32" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="alt" vertex="1">
+          <mxGeometry height="30" width="60" x="13" y="359" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-33" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="200 ClaimContextDto&lt;div&gt;(data dokladu, zákazník, faktura)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="190" x="245.25" y="369" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-34" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="240.25" y="401" as="sourcePoint" />
+            <mxPoint x="440" y="401" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-36" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;curved=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="440" />
+              <mxPoint x="480" y="480" />
+            </Array>
+            <mxPoint x="440" y="440" as="sourcePoint" />
+            <mxPoint x="440" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-37" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="mapuj na doménový snapshot" vertex="1">
+          <mxGeometry height="30" width="190" x="342" y="419" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-38" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="ulož reklamaci + snapshot" vertex="1">
+          <mxGeometry height="30" width="385.5" x="444.5" y="577" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-39" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="440" y="600" as="sourcePoint" />
+            <mxPoint x="840" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-40" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="438" y="520" as="sourcePoint" />
+            <mxPoint x="63" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="předvyplněný formulář" vertex="1">
+          <mxGeometry height="34" width="370" x="68" y="496" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-43" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="doplní popis vady" vertex="1">
+          <mxGeometry height="30" width="360" x="68" y="537" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-44" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="63" y="560" as="sourcePoint" />
+            <mxPoint x="438" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-45" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="404 Not Found" vertex="1">
+          <mxGeometry height="30" width="190" x="245.38" y="657" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-46" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="240.38" y="680" as="sourcePoint" />
+            <mxPoint x="440.13" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-47" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="440" y="720" as="sourcePoint" />
+            <mxPoint x="65" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-48" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Chyba: doklad nenalezen" vertex="1">
+          <mxGeometry height="30" width="370" x="70" y="698" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="503 Service Unavailable" vertex="1">
+          <mxGeometry height="30" width="190" x="245.38" y="777" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-55" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="240.38" y="800" as="sourcePoint" />
+            <mxPoint x="440.13" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-56" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;dashed=1;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="440" y="840" as="sourcePoint" />
+            <mxPoint x="65" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-57" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Chyba: systém dočasně nedostupný" vertex="1">
+          <mxGeometry height="30" width="370" x="70" y="818" as="geometry" />
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-58" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="70" y="640" as="sourcePoint" />
+            <mxPoint x="840" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6xeP986g01ldGgNOtZIw-59" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="71" y="760" as="sourcePoint" />
+            <mxPoint x="841" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
