@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Návrh API – reklamační systém</title>
+<style>
+  :root {
+    --navy: #1E2761; --blue: #2D4A9E; --purple: #534AB7;
+    --green: #1D6B4E; --amber: #92400E; --gray: #6B7280; --red: #B91C1C;
+    --bg: #FAFBFD; --card: #FFFFFF; --border: #E2E8F0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: #1a202c; line-height: 1.65; padding: 48px 32px; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .header { margin-bottom: 36px; padding-bottom: 24px; border-bottom: 3px solid var(--border); }
+  .badge { display: inline-block; font-size: 12px; font-weight: 700; color: var(--purple); background: #EDE9FE; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; }
+  h1 { font-size: 36px; color: var(--navy); font-weight: 800; letter-spacing: -0.02em; }
+  .subtitle { color: var(--gray); font-size: 17px; margin-top: 8px; }
+  .desc { color: #4a5568; font-size: 16px; margin: 20px 0; max-width: 860px; }
+  h2 { font-size: 25px; color: var(--navy); margin: 48px 0 12px; font-weight: 700; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 18px; color: var(--blue); margin: 30px 0 10px; font-weight: 600; }
+  h4 { font-size: 15px; color: var(--navy); margin: 20px 0 8px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; background: var(--card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  th { background: var(--navy); color: white; text-align: left; padding: 11px 13px; font-size: 12.5px; font-weight: 600; }
+  td { padding: 10px 13px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .m { font-family: 'Consolas', monospace; font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+  .m-get { background: #D1FAE5; color: #14532d; }
+  .m-post { background: #DBEAFE; color: #1E40AF; }
+  .m-patch { background: #FEF3C7; color: #92400E; }
+  .m-put { background: #EDE9FE; color: #5B21B6; }
+  .m-del { background: #FEE2E2; color: #B91C1C; }
+  .path { font-family: 'Consolas', monospace; font-size: 12.5px; color: var(--navy); }
+  .note { background: #FEF3C7; border-left: 4px solid var(--amber); padding: 15px 19px; border-radius: 8px; margin: 20px 0; font-size: 14px; }
+  .note strong { color: var(--navy); }
+  .note-green { background: #D1FAE5; border-left-color: var(--green); }
+  .note-blue { background: #DBEAFE; border-left-color: var(--blue); }
+  .note-red { background: #FEE2E2; border-left-color: var(--red); }
+  pre { background: #1a202c; color: #e2e8f0; padding: 16px 20px; border-radius: 8px; margin: 14px 0; font-family: 'Consolas', monospace; font-size: 12.5px; overflow-x: auto; line-height: 1.55; }
+  pre .k { color: #90CDF4; }
+  pre .s { color: #68D391; }
+  pre .c { color: #718096; }
+  pre .n { color: #F6AD55; }
+  code { background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 12.5px; color: var(--purple); }
+  ul { margin: 10px 0 10px 22px; }
+  li { margin: 5px 0; font-size: 14.5px; }
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 26px; margin: 24px 0 36px; }
+  .toc ol { margin-left: 20px; }
+  .toc li { margin: 5px 0; font-size: 14.5px; }
+  .toc a { color: var(--blue); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <span class="badge">NÁVRH API · REFERENČNÍ DOKUMENT</span>
+    <h1>Návrh API</h1>
+    <p class="subtitle">Reklamační systém pro stavební materiály</p>
+  </div>
+
+  <p class="desc">
+    Návrh rozhraní vychází z user stories v zadání a ze scénářů zachycených v sekvenčních diagramech.
+    Dokument popisuje veřejné API reklamační aplikace a integrační kontrakt, podle kterého se na ni napojují
+    cizí systémy. Rozdělení je záměrné: vlastní API vzniká spolu s implementací, integrační kontrakt musí
+    existovat dřív, protože ho implementuje cizí tým.
+  </p>
+
+  <div class="toc">
+    <strong>Obsah</strong>
+    <ol>
+      <li><a href="#principy">Průřezová pravidla</a></li>
+      <li><a href="#verejne">Veřejné API reklamační aplikace</a></li>
+      <li><a href="#dto">Datové struktury</a></li>
+      <li><a href="#kontrakt">Integrační kontrakt pro cizí systémy</a></li>
+      <li><a href="#chyby">Chybové stavy</a></li>
+      <li><a href="#overeni">Ověření proti zadání</a></li>
+    </ol>
+  </div>
+
+  <!-- ═══════════ 1 ═══════════ -->
+  <h2 id="principy">1. Průřezová pravidla</h2>
+  <p class="desc">Rozhodnutí, která platí pro celé API. Stanovena předem, aby se nemusela opravovat napříč všemi endpointy.</p>
+
+  <h3>Adresace a verzování</h3>
+  <table>
+    <tr><th style="width:190px;">Pravidlo</th><th>Podoba</th></tr>
+    <tr><td>Základ cesty</td><td><code>/api/v1/…</code> – verze v cestě, ne v hlavičce</td></tr>
+    <tr><td>Zdroje v množném čísle</td><td><code>/claims</code>, ne <code>/claim</code></td></tr>
+    <tr><td>Akce jako HTTP metoda</td><td><code>POST /claims/[id]/costs</code>, ne <code>/addCost</code></td></tr>
+    <tr><td>Podřízené zdroje</td><td>Vnořené pod nadřazený: <code>/claims/[id]/attachments</code></td></tr>
+    <tr><td>Názvy polí</td><td>anglicky, camelCase – bez diakritiky v klíčích JSON</td></tr>
+  </table>
+
+  <h3>Autentizace a tenant</h3>
+  <p>Všechny endpointy vyžadují token. Uživatelské požadavky nesou token přihlášeného uživatele,
+     strojová volání (ICOBIS) token vydaný přes client credentials.</p>
+  <pre>Authorization: Bearer eyJhbGciOiJSUzI1NiIs…</pre>
+
+  <div class="note-red note">
+    <strong>Tenant se čte výhradně z tokenu.</strong> Nikdy z cesty, query parametru ani těla požadavku.
+    Kdyby byl tenant vstupem od klienta, stačil by jeden platný účet k přečtení dat cizí firmy.
+    Identita a rozsah oprávnění patří do podepsaného tokenu, který klient nemůže změnit.
+  </div>
+
+  <h3>Peněžní částky</h3>
+  <p>U reklamací je částka podklad pro dobropis, takže nesmí dojít ke ztrátě přesnosti.
+     Nikdy <code>float</code> ani <code>double</code>.</p>
+  <pre>{ <span class="k">"amount"</span>: { <span class="k">"value"</span>: <span class="s">"12500.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> } }</pre>
+  <p style="font-size:14px;color:#4a5568;">
+    Hodnota se přenáší jako řetězec. Gramatika JSONu podle RFC 8259 připouští čísla
+    s libovolnou přesností – omezení na dvojitou přesnost je vlastnost parserů, ne
+    formátu. Řetězec zaručí, že částka dorazí přesně tak, jak byla zapsána, nezávisle
+    na implementaci druhé strany.
+  </p>
+
+  <h3>Datum a čas</h3>
+  <ul>
+    <li>Časová razítka v ISO 8601 v UTC: <code>2026-06-15T08:30:00Z</code></li>
+    <li>Data bez času jako prosté datum: <code>2026-06-15</code></li>
+    <li>Lhůty se počítají v celých dnech, proto se u nich pracuje s datem, ne s okamžikem</li>
+  </ul>
+
+  <h3>Stránkování a řazení</h3>
+  <pre>GET /api/v1/claims?page=1&amp;size=50&amp;sort=createdAt:desc
+
+{
+  <span class="k">"items"</span>: [ … ],
+  <span class="k">"page"</span>: <span class="n">1</span>,
+  <span class="k">"size"</span>: <span class="n">50</span>,
+  <span class="k">"totalItems"</span>: <span class="n">342</span>,
+  <span class="k">"totalPages"</span>: <span class="n">7</span>
+}</pre>
+
+  <h3>Filtrování</h3>
+  <p>Jednoduché filtry přes query parametry. Pro složené dotazy, které by přesáhly délku URL,
+     existuje samostatný vyhledávací endpoint s tělem požadavku.</p>
+  <table>
+    <tr><th style="width:200px;">Případ</th><th>Řešení</th></tr>
+    <tr><td>Několik filtrů</td><td><code>GET /claims?state=InProgress&amp;deadlineWithinDays=5</code></td></tr>
+    <tr><td>Složený dotaz</td><td><code>POST /claims/search</code> s filtry v těle</td></tr>
+    <tr><td>Kombinace filtrů</td><td>Zadané filtry se doplňují – musí platit všechny zároveň. Prázdný dotaz bez jediného filtru vrací 400</td></tr>
+  </table>
+  <div class="note">
+    <strong>K metodě QUERY:</strong> Pro bezpečné dotazy s tělem existuje od roku 2026 metoda <code>QUERY</code>
+    (RFC 10008). Podpora v ASP.NET Core zatím není hotová, proto se používá <code>POST /search</code> –
+    zavedené řešení, na které je připravena veškerá infrastruktura.
+  </div>
+
+  <h3>Idempotence</h3>
+  <p>Operace, které vytvářejí doklad s finančním dopadem, přijímají hlavičku <code>Idempotency-Key</code>.
+     Opakovaný požadavek se stejným klíčem vrátí původní výsledek místo vytvoření druhého dokladu.
+     Je to nutné proto, že událost z fronty může dorazit vícekrát.</p>
+  <pre>Idempotency-Key: claim-2026-0142-creditnote</pre>
+
+  <!-- ═══════════ 2 ═══════════ -->
+  <h2 id="verejne">2. Veřejné API reklamační aplikace</h2>
+  <p class="desc">Jednotné pro všechny tenanty. ICOBIS ho používá stejně jako libovolný jiný systém –
+     rozdíl je jen v hloubce integrace na druhé straně.</p>
+
+  <h3>Reklamace</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims</td>
+      <td>Založí reklamaci. Tělo obsahuje popis vady a snapshot kontextu z cizího systému (viz US-01, US-07)</td>
+      <td>Referent, Vedoucí</td><td>201, 400, 409</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims</td>
+      <td>Seznam s filtry a stránkováním – podklad pro přehledy a hlídání lhůt (US-03, US-11)</td>
+      <td>všechny</td><td>200</td>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims/search</td>
+      <td>Vyhledávání se složeným filtrem v těle požadavku</td>
+      <td>všechny</td><td>200, 400</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims/[id]</td>
+      <td>Detail včetně snapshotů, nákladů, účastníků a stavu lhůty</td>
+      <td>všechny</td><td>200, 404</td>
+    </tr>
+    <tr>
+      <td><span class="m m-patch">PATCH</span></td>
+      <td class="path">/claims/[id]</td>
+      <td>Úprava popisu vady a dalších editovatelných údajů</td>
+      <td>Referent, Vedoucí</td><td>200, 400, 409</td>
+    </tr>
+  </table>
+
+  <h3>Workflow a lhůty</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-patch">PATCH</span></td>
+      <td class="path">/claims/[id]/state</td>
+      <td>Změna stavu. Server ověří, že přechod je povolený, a sám pozastaví nebo obnoví lhůtu (US-08)</td>
+      <td>dle cílového stavu</td><td>200, 409, 403</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims/[id]/state/transitions</td>
+      <td>Povolené přechody z aktuálního stavu pro daného uživatele – rozhraní nemusí znát pravidla</td>
+      <td>všechny</td><td>200</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims/[id]/history</td>
+      <td>Chronologická historie změn a událostí (US-05)</td>
+      <td>všechny</td><td>200</td>
+    </tr>
+  </table>
+
+  <div class="note-blue note">
+    <strong>Proč jsou přechody vlastní endpoint:</strong> Pravidla workflow patří na server, ne do rozhraní.
+    Kdyby si klient sám počítal, které tlačítko zobrazit, existovala by pravidla na dvou místech a časem
+    by se rozešla. Endpoint <code>transitions</code> vrátí, co uživatel v daném stavu smí, a rozhraní
+    to jen vykreslí. Zároveň je díky tomu obsluha stejná pro webové rozhraní i cizí systém.
+  </div>
+
+  <h3>Dodací listy, náklady, přílohy</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims/[id]/delivery-notes</td>
+      <td>Přidá další dodací list. Ověří shodu tenanta i odběratele se zbytkem reklamace</td>
+      <td>Referent, Vedoucí</td><td>201, 409</td>
+    </tr>
+    <tr>
+      <td><span class="m m-del">DELETE</span></td>
+      <td class="path">/claims/[id]/delivery-notes/[dlId]</td>
+      <td>Odebere dodací list. Poslední odebrat nelze</td>
+      <td>Referent, Vedoucí</td><td>204, 409</td>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims/[id]/costs</td>
+      <td>Zaeviduje náklad – kategorie, částka, popis (US-06)</td>
+      <td>Referent, Vedoucí</td><td>201, 400</td>
+    </tr>
+    <tr>
+      <td><span class="m m-del">DELETE</span></td>
+      <td class="path">/claims/[id]/costs/[costId]</td>
+      <td>Odebere chybně zadaný náklad</td>
+      <td>Referent, Vedoucí</td><td>204</td>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims/[id]/attachments</td>
+      <td>Nahraje fotografii nebo dokument, multipart (US-05)</td>
+      <td>Referent, Technik, Vedoucí</td><td>201, 413</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims/[id]/attachments/[fileId]</td>
+      <td>Stažení přílohy</td>
+      <td>všechny</td><td>200, 404</td>
+    </tr>
+  </table>
+
+  <h3>Komunikace a protokol</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims/[id]/messages</td>
+      <td>Odešle e-mail na adresu odběratele, volitelně ze šablony. Kopie se ukládá do historie reklamace (US-04)</td>
+      <td>Referent, Vedoucí</td><td>202, 400</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims/[id]/messages</td>
+      <td>Historie odeslané komunikace</td>
+      <td>všechny</td><td>200</td>
+    </tr>
+  </table>
+  <div class="note-blue note">
+    <strong>Odběratel není uživatelem systému.</strong> Aplikaci používá výhradně firma,
+    která reklamaci řeší. Odběratel do ní nemá přístup – tyto endpointy odesílají e-mail
+    na jeho adresu a uchovávají kopii v historii reklamace.
+
+    <br/><br/>Interní upozornění (blížící se lhůta, přiřazení k reklamaci) sem nepatří.
+    Nespouští je uživatel, ale uplynutí času nebo změna stavu, takže nemají volajícího
+    ani endpoint – řeší je modul Notifikace jako reakci na doménovou událost.
+  </div>
+  <h3>Protokol</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td>
+      <td class="path">/claims/[id]/protocol</td>
+      <td>Vygeneruje závěrečný protokol o výsledku (US-09)</td>
+      <td>Vedoucí</td><td>201, 409</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/claims/[id]/protocol</td>
+      <td>Stažení protokolu v PDF</td>
+      <td>všechny</td><td>200, 404</td>
+    </tr>
+  </table>
+
+  <h3>Statistiky</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/recipe-stats/[baseCode]</td>
+      <td>Počet reklamací pro recepturu. Volá ICOBIS při zobrazení detailu receptury</td>
+      <td>servisní účet</td><td>200, 401</td>
+    </tr>
+  </table>
+
+  <h3>Konfigurace tenanta</h3>
+  <table>
+    <tr>
+      <th style="width:62px;">Metoda</th><th style="width:250px;">Cesta</th>
+      <th>Popis</th><th style="width:130px;">Role</th><th style="width:110px;">Kódy</th>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/settings</td>
+      <td>Výchozí lhůty, kategorie nákladů, šablony zpráv</td>
+      <td>Administrátor</td><td>200</td>
+    </tr>
+    <tr>
+      <td><span class="m m-put">PUT</span></td>
+      <td class="path">/settings</td>
+      <td>Uloží konfiguraci tenanta (US-10)</td>
+      <td>Administrátor</td><td>200, 400</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td>
+      <td class="path">/settings/roles</td>
+      <td>Role a jejich přiřazení k fázím workflow</td>
+      <td>Administrátor</td><td>200</td>
+    </tr>
+    <tr>
+      <td><span class="m m-put">PUT</span></td>
+      <td class="path">/settings/roles</td>
+      <td>Uloží konfiguraci rolí</td>
+      <td>Administrátor</td><td>200, 400</td>
+    </tr>
+  </table>
+
+  <!-- ═══════════ 3 ═══════════ -->
+  <h2 id="dto">3. Datové struktury</h2>
+
+  <h3>Založení reklamace</h3>
+  <p>Snapshot kontextu se posílá spolu se založením, aby reklamace vznikla jedním zápisem
+     až po doplnění popisu vady.</p>
+  <pre><span class="c">POST /api/v1/claims</span>
+
+{
+  <span class="k">"defectDescription"</span>: <span class="s">"Beton po 7 dnech vykazuje nízkou pevnost"</span>,
+  <span class="k">"reportedAt"</span>: <span class="s">"2026-06-15"</span>,
+  <span class="k">"customerContact"</span>: <span class="s">"jan.novak@stavba.cz"</span>,
+  <span class="k">"context"</span>: { <span class="c">/* ClaimContext ze zdrojového systému */</span> }
+}
+
+<span class="c">→ 201 Created</span>
+{
+  <span class="k">"id"</span>: <span class="s">"9f2a-…"</span>,
+  <span class="k">"number"</span>: <span class="s">"2026/0142"</span>,
+  <span class="k">"state"</span>: <span class="s">"New"</span>,
+  <span class="k">"deadline"</span>: { <span class="k">"dueDate"</span>: <span class="s">"2026-07-15"</span>, <span class="k">"daysRemaining"</span>: <span class="n">30</span>, <span class="k">"suspended"</span>: <span class="k">false</span> }
+}</pre>
+
+  <h3>Detail reklamace</h3>
+  <pre><span class="c">GET /api/v1/claims/9f2a-…</span>
+
+{
+  <span class="k">"id"</span>: <span class="s">"9f2a-…"</span>,
+  <span class="k">"number"</span>: <span class="s">"2026/0142"</span>,
+  <span class="k">"state"</span>: <span class="s">"UnderAssessment"</span>,
+  <span class="k">"defectDescription"</span>: <span class="s">"…"</span>,
+  <span class="k">"createdAt"</span>: <span class="s">"2026-06-15T08:30:00Z"</span>,
+  <span class="k">"deadline"</span>: {
+    <span class="k">"dueDate"</span>: <span class="s">"2026-07-15"</span>,
+    <span class="k">"daysRemaining"</span>: <span class="n">12</span>,
+    <span class="k">"suspended"</span>: <span class="k">true</span>,
+    <span class="k">"suspendedSince"</span>: <span class="s">"2026-06-20"</span>
+  },
+  <span class="k">"deliveryNotes"</span>: [ <span class="c">/* snapshoty */</span> ],
+  <span class="k">"costs"</span>: {
+    <span class="k">"items"</span>: [ { <span class="k">"category"</span>: <span class="s">"Laboratory"</span>, <span class="k">"amount"</span>: { <span class="k">"value"</span>: <span class="s">"3200.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> } } ],
+    <span class="k">"total"</span>: { <span class="k">"value"</span>: <span class="s">"5700.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> }
+  },
+  <span class="k">"creditNote"</span>: { <span class="k">"state"</span>: <span class="s">"Pending"</span>, <span class="k">"externalId"</span>: <span class="k">null</span> }
+}</pre>
+
+  <div class="note">
+    <strong>Stav dobropisu je součástí detailu.</strong> Protože dobropis vzniká asynchronně,
+    musí být v rozhraní vidět, jestli už doklad v cizím systému existuje, nebo se na něj čeká.
+    Bez toho by uživatel neměl jak poznat, že se něco nepovedlo.
+  </div>
+
+  <h3>Změna stavu</h3>
+  <pre><span class="c">PATCH /api/v1/claims/9f2a-…/state</span>
+
+{
+  <span class="k">"targetState"</span>: <span class="s">"Approved"</span>,
+  <span class="k">"reason"</span>: <span class="s">"Navážka cementu mimo limit dle záměsového protokolu"</span>,
+  <span class="k">"compensation"</span>: { <span class="k">"value"</span>: <span class="s">"12500.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> }
+}
+
+<span class="c">→ 200 OK  – změna proběhla, dobropis se vytváří na pozadí</span>
+<span class="c">→ 409 Conflict – přechod z aktuálního stavu není povolený</span></pre>
+
+  <h3>Statistika receptury</h3>
+  <pre><span class="c">GET /api/v1/recipe-stats/C25-30</span>
+
+{
+  <span class="k">"baseCode"</span>: <span class="s">"C25/30"</span>,
+  <span class="k">"total"</span>: <span class="n">7</span>,
+  <span class="k">"approved"</span>: <span class="n">5</span>,
+  <span class="k">"rejected"</span>: <span class="n">2</span>,
+  <span class="k">"lastClaimDate"</span>: <span class="s">"2026-06-15"</span>
+}</pre>
+
+  <!-- ═══════════ 4 ═══════════ -->
+  <h2 id="kontrakt">4. Integrační kontrakt pro cizí systémy</h2>
+  <p class="desc">
+    Rozhraní, které musí vystavit cizí systém, aby se mohl napojit na úrovni plné integrace.
+    Tuhle část implementuje tým na straně cizího systému, proto vzniká jako specifikace dřív než kód.
+    U ICOBIS ji implementuji sám, protože mám přístup ke zdrojovému kódu.
+  </p>
+
+  <h3>Přehled</h3>
+  <table>
+    <tr><th style="width:62px;">Metoda</th><th style="width:230px;">Cesta</th><th>Účel</th><th style="width:110px;">Úroveň</th></tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td><td class="path">/claim-context/[id]</td>
+      <td>Agregovaný kontext dodávky – doklad, faktura, výrobní protokol, receptura</td><td>plná</td>
+    </tr>
+    <tr>
+      <td><span class="m m-post">POST</span></td><td class="path">/creditnote</td>
+      <td>Vytvoření dobropisu po uznání reklamace</td><td>plná</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td><td class="path">/delivery-notes</td>
+      <td>Vyhledání dodacích listů – volný text nebo filtr podle odběratele a období</td><td>vyhledávací</td>
+    </tr>
+    <tr>
+      <td><span class="m m-get">GET</span></td><td class="path">/customers</td>
+      <td>Vyhledání odběratelů, když referent nezná číslo dokladu</td><td>vyhledávací</td>
+    </tr>
+  </table>
+
+  <div class="note-blue note">
+    <strong>Obě úrovně napojení používají stejný endpoint pro načtení dat.</strong>
+    Vyhledávání pouze zjistí identifikátor dokladu; plný kontext se pak načítá přes
+    <code>/claim-context</code> stejně jako u plné integrace. Jednodušší úroveň napojení
+    tak nedostává chudší data – liší se jen tím, jak se k identifikátoru dojde.
+  </div>
+
+  <h3>Struktura ClaimContext</h3>
+  <p>Povinný je pouze dodací list. Ostatní části jsou volitelné – systém, který je nemá,
+     pošle <code>null</code> a integrace funguje dál v omezeném rozsahu.</p>
+  <pre>{
+  <span class="k">"deliveryNote"</span>: {
+    <span class="k">"externalId"</span>: <span class="s">"a3f8-…"</span>,
+    <span class="k">"documentNumber"</span>: <span class="s">"DL-2026-1234"</span>,
+    <span class="k">"deliveredAt"</span>: <span class="s">"2026-06-15T08:30:00Z"</span>,
+    <span class="k">"customer"</span>: { <span class="k">"name"</span>: <span class="s">"…"</span>, <span class="k">"registrationNumber"</span>: <span class="s">"12345678"</span>, <span class="k">"address"</span>: { … } },
+    <span class="k">"site"</span>: { <span class="k">"name"</span>: <span class="s">"…"</span> },
+    <span class="k">"quantity"</span>: { <span class="k">"value"</span>: <span class="n">8</span>, <span class="k">"unit"</span>: <span class="s">"m3"</span> },
+    <span class="k">"priceExclVat"</span>: { <span class="k">"value"</span>: <span class="s">"25000.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> },
+    <span class="k">"vatRate"</span>: <span class="n">21</span>
+  },
+  <span class="k">"invoice"</span>: {
+    <span class="k">"externalId"</span>: <span class="s">"…"</span>, <span class="k">"documentNumber"</span>: <span class="s">"FV-2026-5678"</span>,
+    <span class="k">"issuedAt"</span>: <span class="s">"2026-06-20"</span>, <span class="k">"dueDate"</span>: <span class="s">"2026-07-20"</span>,
+    <span class="k">"priceExclVat"</span>: { <span class="k">"value"</span>: <span class="s">"25000.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> }, <span class="k">"vatRate"</span>: <span class="n">21</span>
+  },
+  <span class="k">"recipe"</span>: {
+    <span class="k">"baseCode"</span>: <span class="s">"C25/30"</span>, <span class="k">"name"</span>: <span class="s">"Beton C25/30 XC2"</span>,
+    <span class="k">"strengthClass"</span>: <span class="s">"C25/30"</span>, <span class="k">"consistency"</span>: <span class="s">"S3"</span>,
+    <span class="k">"exposureClass"</span>: <span class="s">"XC2"</span>, <span class="k">"maxAggregateSizeMm"</span>: <span class="n">22</span>,
+    <span class="k">"composition"</span>: [ { <span class="k">"material"</span>: <span class="s">"CEM I 42,5"</span>, <span class="k">"amount"</span>: <span class="n">320</span>, <span class="k">"unit"</span>: <span class="s">"kg"</span> } ]
+  },
+  <span class="k">"batchProtocol"</span>: {
+    <span class="k">"waterCementRatioDesigned"</span>: <span class="n">0.50</span>,
+    <span class="k">"waterCementRatioActual"</span>: <span class="n">0.59</span>,
+    <span class="k">"concreteTemperature"</span>: <span class="n">22</span>,
+    <span class="k">"outOfLimit"</span>: <span class="k">true</span>,
+    <span class="k">"deviations"</span>: [
+      { <span class="k">"material"</span>: <span class="s">"CEM I 42,5"</span>, <span class="k">"designed"</span>: <span class="n">320</span>, <span class="k">"actual"</span>: <span class="n">295</span>,
+        <span class="k">"deviationPercent"</span>: <span class="n">-7.8</span>, <span class="k">"outOfLimit"</span>: <span class="k">true</span> }
+    ]
+  },
+  <span class="k">"certificates"</span>: [ { <span class="k">"standard"</span>: <span class="s">"ČSN EN 206+A2"</span>, <span class="k">"number"</span>: <span class="s">"CE-1234"</span>, <span class="k">"issuer"</span>: <span class="s">"TZÚS Praha"</span> } ],
+  <span class="k">"labResults"</span>: [ { <span class="k">"ageInDays"</span>: <span class="n">28</span>, <span class="k">"strengthMpa"</span>: <span class="s">"22.50"</span>, <span class="k">"requiredStrengthMpa"</span>: <span class="s">"25.00"</span>, <span class="k">"compliant"</span>: <span class="k">false</span>, <span class="k">"testDate"</span>: <span class="s">"2026-07-13"</span> } ]
+}</pre>
+
+  <h3>Vytvoření dobropisu</h3>
+  <pre><span class="c">POST /creditnote</span>
+<span class="c">Idempotency-Key: claim-2026-0142</span>
+
+{
+  <span class="k">"deliveryNoteId"</span>: <span class="s">"a3f8-…"</span>,   <span class="c">// primární doklad, na něj se dobropis vystaví</span>
+  <span class="k">"relatedDeliveryNotes"</span>: [ <span class="s">"DL-2026-1235"</span>, <span class="s">"DL-2026-1236"</span> ],
+  <span class="k">"amount"</span>: { <span class="k">"value"</span>: <span class="s">"12500.00"</span>, <span class="k">"currency"</span>: <span class="s">"CZK"</span> },
+  <span class="k">"reason"</span>: <span class="s">"Uznaná reklamace č. 2026/0142"</span>,
+  <span class="k">"claimReference"</span>: <span class="s">"2026/0142"</span>
+}
+
+<span class="c">→ 201 Created</span>
+{
+  <span class="k">"externalId"</span>: <span class="s">"…"</span>,
+  <span class="k">"documentNumber"</span>: <span class="s">"DO-2026-0088"</span>,
+  <span class="k">"type"</span>: <span class="s">"FromInvoice"</span>   <span class="c">// nebo "General", není-li faktura</span>
+}</pre>
+
+  <div class="note-green note">
+    <strong>Typ dobropisu určuje cizí systém, ne volající.</strong> Reklamační aplikace pošle částku a odkaz na doklad;
+    zda vznikne dobropis navázaný na fakturu, nebo obecný, rozhodne cizí systém podle toho, co u sebe najde.
+    Volající nemusí znát vnitřní pravidla fakturace.
+  </div>
+
+  <h3>Zápis v OpenAPI</h3>
+  <pre><span class="k">openapi</span>: <span class="s">3.1.0</span>
+<span class="k">info</span>:
+  <span class="k">title</span>: <span class="s">Kontrakt pro napojení cizího systému na reklamační aplikaci</span>
+  <span class="k">version</span>: <span class="s">"1.0.0"</span>
+
+<span class="k">paths</span>:
+  <span class="k">/claim-context/{deliveryNoteId}</span>:
+    <span class="k">get</span>:
+      <span class="k">summary</span>: <span class="s">Agregovaný kontext dodávky pro založení reklamace</span>
+      <span class="k">security</span>: [ { <span class="k">bearerAuth</span>: [] } ]
+      <span class="k">parameters</span>:
+        - <span class="k">name</span>: <span class="s">deliveryNoteId</span>
+          <span class="k">in</span>: <span class="s">path</span>
+          <span class="k">required</span>: <span class="k">true</span>
+          <span class="k">schema</span>: { <span class="k">type</span>: <span class="s">string</span> }
+      <span class="k">responses</span>:
+        <span class="s">'200'</span>:
+          <span class="k">content</span>:
+            <span class="k">application/json</span>:
+              <span class="k">schema</span>: { <span class="k">$ref</span>: <span class="s">'#/components/schemas/ClaimContext'</span> }
+        <span class="s">'404'</span>: { <span class="k">description</span>: <span class="s">Doklad neexistuje</span> }
+        <span class="s">'503'</span>: { <span class="k">description</span>: <span class="s">Systém dočasně nedostupný</span> }
+
+<span class="k">components</span>:
+  <span class="k">securitySchemes</span>:
+    <span class="k">bearerAuth</span>: { <span class="k">type</span>: <span class="s">http</span>, <span class="k">scheme</span>: <span class="s">bearer</span>, <span class="k">bearerFormat</span>: <span class="s">JWT</span> }</pre>
+
+  <!-- ═══════════ 5 ═══════════ -->
+  <h2 id="chyby">5. Chybové stavy</h2>
+  <p class="desc">Jednotný formát podle RFC 9457 (Problem Details), který ASP.NET Core podporuje zabudovaně.</p>
+  <pre><span class="c">HTTP/1.1 409 Conflict</span>
+<span class="c">Content-Type: application/problem+json</span>
+
+{
+  <span class="k">"type"</span>: <span class="s">"https://reklamace.firma.cz/errors/invalid-state-transition"</span>,
+  <span class="k">"title"</span>: <span class="s">"Nepovolený přechod stavu"</span>,
+  <span class="k">"status"</span>: <span class="n">409</span>,
+  <span class="k">"detail"</span>: <span class="s">"Z uzavřené reklamace nelze přejít do stavu V řešení"</span>,
+  <span class="k">"instance"</span>: <span class="s">"/api/v1/claims/9f2a-…/state"</span>
+}</pre>
+
+  <table>
+    <tr><th style="width:70px;">Kód</th><th style="width:180px;">Význam</th><th>Kdy nastane</th></tr>
+    <tr><td><strong>400</strong></td><td>Neplatný požadavek</td><td>Chybí povinné pole, částka je záporná, neznámá kategorie nákladu</td></tr>
+    <tr><td><strong>401</strong></td><td>Neověřeno</td><td>Chybějící, neplatný nebo vypršelý token</td></tr>
+    <tr><td><strong>403</strong></td><td>Nedostatečné oprávnění</td><td>Token je platný, ale role na akci nestačí – například referent chce uznat reklamaci</td></tr>
+    <tr><td><strong>404</strong></td><td>Nenalezeno</td><td>Zdroj neexistuje, nebo patří jinému tenantovi</td></tr>
+    <tr><td><strong>409</strong></td><td>Konflikt se stavem</td><td>Nepovolený přechod, úprava uzavřené reklamace, odebrání posledního dodacího listu, souběžná úprava (optimistické zamykání)</td></tr>
+    <tr><td><strong>413</strong></td><td>Příliš velký obsah</td><td>Příloha přesahuje povolenou velikost</td></tr>
+    <tr><td><strong>503</strong></td><td>Služba nedostupná</td><td>Nedostupný cizí systém při načítání kontextu</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Cizí tenant vrací 404, ne 403.</strong> Kód 403 by potvrdil, že zdroj s daným identifikátorem
+    existuje – jen k němu volající nemá přístup. To je informace, kterou nemá dostat.
+    Z pohledu tenanta cizí data neexistují.
+  </div>
+
+  <!-- ═══════════ 6 ═══════════ -->
+  <h2 id="overeni">6. Ověření proti zadání</h2>
+  <p class="desc">Kontrola, že každá user story má v API oporu.</p>
+  <table>
+    <tr><th style="width:80px;">Story</th><th style="width:250px;">Požadavek</th><th>Pokrytí</th></tr>
+    <tr><td><strong>US-01</strong></td><td>Založení reklamace</td><td><code>POST /claims</code></td></tr>
+    <tr><td><strong>US-02</strong></td><td>Potvrzení zákazníkovi</td><td>Automaticky při založení – modul Notifikace, bez endpointu</td></tr>
+    <tr><td><strong>US-03</strong></td><td>Hlídání lhůt</td><td>Stav lhůty v detailu, filtr <code>deadlineWithinDays</code>, upozornění automaticky</td></tr>
+    <tr><td><strong>US-04</strong></td><td>Komunikace se zákazníkem</td><td><code>POST</code> a <code>GET /claims/[id]/messages</code></td></tr>
+    <tr><td><strong>US-05</strong></td><td>Historie a přílohy</td><td><code>/claims/[id]/history</code>, <code>/claims/[id]/attachments</code></td></tr>
+    <tr><td><strong>US-06</strong></td><td>Evidence nákladů</td><td><code>/claims/[id]/costs</code> se součtem v detailu</td></tr>
+    <tr><td><strong>US-07</strong></td><td>Propojení s dodacími listy</td><td>Snapshot při založení, <code>/claims/[id]/delivery-notes</code> pro další</td></tr>
+    <tr><td><strong>US-08</strong></td><td>Workflow stavů</td><td><code>PATCH /claims/[id]/state</code>, <code>GET …/transitions</code></td></tr>
+    <tr><td><strong>US-09</strong></td><td>Závěrečný protokol</td><td><code>POST</code> a <code>GET /claims/[id]/protocol</code></td></tr>
+    <tr><td><strong>US-10</strong></td><td>Role a multi-tenancy</td><td>Tenant z tokenu u všech volání, <code>/settings/roles</code></td></tr>
+    <tr><td><strong>US-11</strong></td><td>Přehledy</td><td><code>GET /claims</code> s filtry, <code>POST /claims/search</code></td></tr>
+  </table>
+
+  <div class="note-green note">
+    <strong>Co z návrhu vyplynulo navíc:</strong> Endpoint <code>transitions</code> pro povolené přechody
+    a stav dobropisu v detailu reklamace. Ani jedno není v zadání explicitně, ale bez nich by rozhraní
+    muselo duplikovat pravidla workflow, respektive by uživatel neměl jak zjistit, že dobropis ještě nevznikl.
+  </div>
+
+  <div style="margin-top:48px; padding-top:24px; border-top:3px solid var(--border); color:var(--gray); font-size:14px; font-style:italic;">
+    Václav Vrba · BP: Reklamační systém pro stavební materiály · Návrh API
+  </div>
+</div>
+</body>
+</html>
